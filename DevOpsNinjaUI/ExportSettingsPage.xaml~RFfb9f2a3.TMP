@@ -1,0 +1,104 @@
+﻿<Window x:Class="DevOpsNinjaUI.ExportSettingsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DevOpsNinjaUI"
+        mc:Ignorable="d"
+        Title="Pipeline Settings" Height="800" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid>
+                <ComboBox x:Name="drpEnv" SelectionChanged="drpEnv_SelectionChanged" Grid.Row="0"/>
+                <Grid Grid.Row="1">
+                    <Button x:Name="btnLoadUnmanaged" Content="Load Unmanaged" Click="btnLoadUnmanaged_Click" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="1" Height="30" Width="150" Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center" Name="txtFilter"/>
+                    <Button x:Name="btnfilter" Content="Name Filter (Contains)" Grid.Row="1" Grid.Column="1" Click="btnfilter_Click" />
+                    <Button x:Name="btnCloneToSolution" Content="Clone To Solution (Merge)" Grid.Row="2" Grid.ColumnSpan="2" Click="btnCloneToSolution_Click" />
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Solutions}" Name="dgSolutions">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn IsReadOnly="False" Header="Seleccted" Binding="{Binding Selected}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding SolutionName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Display Name" Binding="{Binding FriendlyName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Version" Binding="{Binding SolutionVersion}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Is managed" Binding="{Binding ManagedUnmanaged}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="btnSelectSolution" Content="Close and begin export" Grid.Row="3" Click="btnSelectSolution_Click"/>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Label Content="Select target environment" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"/>
+            <ComboBox x:Name="drpEnvImport" Grid.Row="1"/>
+            <Grid Grid.Row="2">
+                <Button x:Name="btnAddStep" Content="Add Step" Grid.Column="0" Click="btnAddStep_Click"/>
+                <Button x:Name="btnClear" Content="Clear" Grid.Column="1"/>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                <HeaderedItemsControl  Grid.Row="3" Name="lstSteps" ItemsSource="{Binding}">
+                    <HeaderedItemsControl.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="A"/>
+                                <Label Content="B"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </HeaderedItemsControl.HeaderTemplate>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBox IsReadOnly="True" Text="{Binding SelectedSolutionUniqueName}" Grid.Column="0"/>
+                                <TextBox IsReadOnly="True" Text="{Binding Step}" Grid.Column="1"/>
+                                <TextBox IsReadOnly="True" Text="{Binding IsUpgrade}" Grid.Column="2"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </HeaderedItemsControl>
+            </ScrollViewer>
+            
+
+            <Button x:Name="btnImport" Grid.Row="4" Content="Import" Click="btnImport_Click"/>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FetchLoadUnmanagedSolutions" xml:space="preserve">
+    <value>&lt;fetch version='1.0' output-format='xml-platform' mapping='logical'&gt;
+&lt;entity name="solution"&gt;
+&lt;attribute name = "uniquename"/&gt;
+&lt;attribute name = "friendlyname"/&gt;
+&lt;attribute name = "isapimanaged"/&gt;
+&lt;attribute name = "uniquename"/&gt;&lt;attribute name = "ismanaged"/&gt;
+&lt;attribute name = "ismanagedname"/&gt;&lt;attribute name = "publisherid" /&gt;
+&lt;attribute name = "publisheridname"/&gt;&lt;attribute name = "solutionpackageversion" /&gt;
+&lt;attribute name = "version" /&gt;
+&lt;filter type = "and" &gt;&lt;condition attribute = "ismanaged" operator= "eq" value = "0" /&gt;&lt;/filter&gt;
+&lt;order attribute = "createdon" descending = "true" /&gt;
+&lt;/entity&gt;
+&lt;/fetch&gt;</value>
+  </data>
+  <data name="TestResult" xml:space="preserve">
+    <value>&lt;resultset morerecords="0" paging-cookie="&amp;lt;cookie page=&amp;quot;1&amp;quot;&amp;gt;&amp;lt;createdon last=&amp;quot;2021-09-20T16:09:31-00:00&amp;quot; first=&amp;quot;2022-03-23T16:54:58-00:00&amp;quot; /&amp;gt;&amp;lt;solutionid last=&amp;quot;{25A01723-9F63-4449-A3E0-046CC23A2902}&amp;quot; first=&amp;quot;{7D8620F2-C9AA-EC11-B3FE-001DD8030A8D}&amp;quot; /&amp;gt;&amp;lt;/cookie&amp;gt;"&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;SHASHANK TEST&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;SHASHANKTEST&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/23/2022" time="4:54 PM"&gt;2022-03-23T16:54:58-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{7D8620F2-C9AA-EC11-B3FE-001DD8030A8D}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Person Changes to dev1&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;PersonChangestodev1&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/23/2022" time="6:22 AM"&gt;2022-03-23T06:22:03-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{BDDE7B8D-71AA-EC11-B3FE-001DD80307AB}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Ribbon Button&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;RibbonButton&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/22/2022" time="9:44 AM"&gt;2022-03-22T09:44:01-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{95D28194-C4A9-EC11-B3FE-001DD8030CC6}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Search Functionality&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;SearchFunctionality&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="3/17/2022" time="6:39 AM"&gt;2022-03-17T06:39:50-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{707F9309-BDA5-EC11-B3FE-001DD8022B8B}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;TestSolution&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;TestSolution&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/16/2022" time="5:28 AM"&gt;2022-03-16T05:28:19-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{3CE9B6E2-E9A4-EC11-B3FE-001DD8020D58}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;AppointmentPlugin&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;AppointmentPlugin&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/8/2022" time="9:16 AM"&gt;2022-03-08T09:16:18-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{1158354D-F9D5-48F9-A442-71EEB9EC34CC}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;ServiceApprovalRibbonButton&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;ServiceApprovalRibbonButton&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/7/2022" time="11:36 AM"&gt;2022-03-07T11:36:42-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{453A8ADB-0A9E-EC11-B3FE-001DD8015317}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_EnvironmentVariables&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_EnvironmentVariables&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.5&lt;/version&gt;
+		&lt;createdon date="3/7/2022" time="5:53 AM"&gt;2022-03-07T05:53:23-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{82172FE5-DA9D-EC11-B3FE-001DD8019478}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_Sitemaps&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_Sitemaps&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.3.0.0&lt;/version&gt;
+		&lt;createdon date="3/3/2022" time="10:41 AM"&gt;2022-03-03T10:41:55-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{1AA27E89-DE9A-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_Dashboards&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_Dashboards&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.2.0.0&lt;/version&gt;
+		&lt;createdon date="3/3/2022" time="10:29 AM"&gt;2022-03-03T10:29:42-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{A2B746D3-DC9A-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;TestFlow&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;TestFlow&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="3/2/2022" time="10:55 AM"&gt;2022-03-02T10:55:05-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{82DEE135-179A-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_ConnectionReference&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_ConnectionReference&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="3/2/2022" time="10:45 AM"&gt;2022-03-02T10:45:11-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{B2DA3CD3-159A-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_Workflows&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_Workflows&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.2.0.0&lt;/version&gt;
+		&lt;createdon date="3/2/2022" time="9:16 AM"&gt;2022-03-02T09:16:40-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{54803475-099A-EC11-B3FE-001DD8023D90}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_Plugins&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_Plugins&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.1.0.5&lt;/version&gt;
+		&lt;createdon date="3/2/2022" time="7:52 AM"&gt;2022-03-02T07:52:28-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{94C7C4B1-FD99-EC11-B3FE-001DD8023D90}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_SecurityRoles&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_SecurityRoles&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.2.0.1&lt;/version&gt;
+		&lt;createdon date="3/2/2022" time="5:53 AM"&gt;2022-03-02T05:53:12-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{3F7DEF0A-ED99-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Lead Portal Changes&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;LeadPortalChanges&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="3/1/2022" time="9:55 AM"&gt;2022-03-01T09:55:36-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{4D95A2B9-4599-EC11-B3FE-001DD8023DE1}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_WebResources&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_WebResources&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.3.0.0&lt;/version&gt;
+		&lt;createdon date="2/28/2022" time="2:46 PM"&gt;2022-02-28T14:46:06-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{ADAB2624-A598-EC11-B3FE-001DD8023D90}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_STAAND_Config&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_STAAND_Config&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.8.0.0&lt;/version&gt;
+		&lt;createdon date="2/23/2022" time="2:31 PM"&gt;2022-02-23T14:31:40-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{9E9FFD4F-B594-EC11-8D20-001DD8034371}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Check Ribbon for js&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Taskjs&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="2/22/2022" time="3:01 PM"&gt;2022-02-22T15:01:03-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{7F9B803A-F093-EC11-8D20-001DD8034B34}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;ProviderConfig&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;ProviderConfig&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.2&lt;/version&gt;
+		&lt;createdon date="2/11/2022" time="5:44 AM"&gt;2022-02-11T05:44:05-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{158FAB19-CDE1-4B3F-AAEE-E029CE1DADEA}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_Plugin&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_Plugin&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.9&lt;/version&gt;
+		&lt;createdon date="2/1/2022" time="8:26 AM"&gt;2022-02-01T08:26:19-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{B4BB4DA1-3883-EC11-8D20-001DD801E596}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_SecurityRole&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_SecurityRole&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.14&lt;/version&gt;
+		&lt;createdon date="2/1/2022" time="8:25 AM"&gt;2022-02-01T08:25:56-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{B9B45E93-3883-EC11-8D20-001DD801E596}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_Workflows&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_Workflows&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.25&lt;/version&gt;
+		&lt;createdon date="2/1/2022" time="8:06 AM"&gt;2022-02-01T08:06:27-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{D6D101D5-3583-EC11-8D20-001DD801A6BF}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_Config&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_Config&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.9.0.1&lt;/version&gt;
+		&lt;createdon date="2/1/2022" time="7:15 AM"&gt;2022-02-01T07:15:34-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2FD0ADDF-F62A-424D-8348-6ED4126DA34D}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_Dashboard&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_Dashboard&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.0.6&lt;/version&gt;
+		&lt;createdon date="1/28/2022" time="5:17 PM"&gt;2022-01-28T17:17:42-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{C39F0C31-5E80-EC11-8D20-001DD8036A22}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Provider_WebResources&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Provider_WebResources&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.15&lt;/version&gt;
+		&lt;createdon date="1/28/2022" time="5:11 PM"&gt;2022-01-28T17:11:46-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{42ED7159-5D80-EC11-8D20-001DD8036A22}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Workflows&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_Workflows&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.6&lt;/version&gt;
+		&lt;createdon date="1/18/2022" time="8:27 AM"&gt;2022-01-18T08:27:43-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{8451A27E-3878-EC11-8940-001DD80237D9}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_WebResources&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_DC_WebResources&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.27&lt;/version&gt;
+		&lt;createdon date="1/11/2022" time="8:20 AM"&gt;2022-01-11T08:20:54-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{3BCA5E5F-B772-EC11-8F8E-001DD8020BE0}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Dummy Webresource Test&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;DummyWebresourceTest&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="1/4/2022" time="7:07 AM"&gt;2022-01-04T07:07:46-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{9610FAFE-2C6D-EC11-8F8E-001DD803221A}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS Environment Variables&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSEnvironmentVariables&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.14&lt;/version&gt;
+		&lt;createdon date="12/29/2021" time="1:40 PM"&gt;2021-12-29T13:40:58-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{849FB5EE-AC68-EC11-8F8E-001DD8002B33}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Search Request Web Resource&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;SearchRequestWebResource&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.2.3&lt;/version&gt;
+		&lt;createdon date="12/27/2021" time="10:03 AM"&gt;2021-12-27T10:03:57-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{1DEE554B-FC66-EC11-8F8E-001DD8002B33}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Search Request Backup&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;SearchRequestBackup&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="12/26/2021" time="10:38 AM"&gt;2021-12-26T10:38:27-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{E4A9A0F0-3766-EC11-8F8E-001DD8002B33}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Qa_Patch_Sprint5_Build2&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Qa_Patch_Sprint5_Build2&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.4&lt;/version&gt;
+		&lt;createdon date="12/24/2021" time="12:38 PM"&gt;2021-12-24T12:38:03-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{6D473C52-B664-EC11-8F8E-001DD800CA91}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS All Modules for Doc Gen&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSAllModulesforDocGen&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="12/21/2021" time="3:50 PM"&gt;2021-12-21T15:50:20-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{1BA620AF-7562-EC11-8F8E-001DD800CA91}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Qa_Patch_Category&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Qa_Patch_Category&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="12/15/2021" time="5:01 PM"&gt;2021-12-15T17:01:08-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{33E2BF92-C85D-EC11-8F8E-001DD80217ED}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Dashboard&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Dashboard&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="12/10/2021" time="3:19 PM"&gt;2021-12-10T15:19:14-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{C7A24582-CC59-EC11-8F8E-001DD80232E4}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;IntakeRibbon&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;IntakeRibbon&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="12/1/2021" time="2:33 PM"&gt;2021-12-01T14:33:59-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2F9225B6-B352-EC11-8C62-001DD802F5EF}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;_MCSHHS_Config_ARM&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;_MCSHHS_Config_ARM&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.3&lt;/version&gt;
+		&lt;createdon date="12/1/2021" time="4:16 AM"&gt;2021-12-01T04:16:04-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{1CEE6CE1-A5E3-48DF-A9A3-237278F7B510}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MandatorySubmission&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MandatorySubmission&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.4&lt;/version&gt;
+		&lt;createdon date="11/25/2021" time="9:14 AM"&gt;2021-11-25T09:14:14-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{564CD10C-D04D-EC11-8C62-001DD802F61F}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;New Ed Neglect&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;NewEdNeglect&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.3&lt;/version&gt;
+		&lt;createdon date="11/15/2021" time="3:33 PM"&gt;2021-11-15T15:33:43-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2779D57D-2F59-4973-9B2E-2FC41AAA52F6}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS Provider Working&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSProviderWorking&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="11/12/2021" time="9:34 PM"&gt;2021-11-12T21:34:49-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{BF010C58-0044-EC11-8C62-001DD80311E9}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS Provider Module for Doc Gen&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSProviderModuleforDocGen&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="11/12/2021" time="8:45 PM"&gt;2021-11-12T20:45:30-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{A8447D75-F943-EC11-8C62-001DD80312DD}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;RibbonIntake&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;RibbonIntake&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="11/10/2021" time="6:33 PM"&gt;2021-11-10T18:33:50-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2ECED9BD-5442-EC11-8C62-001DD80312DD}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Mandatory submission basic form new fileds&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Mandatorysubmissionbasicformfileds&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.3&lt;/version&gt;
+		&lt;createdon date="11/8/2021" time="9:27 AM"&gt;2021-11-08T09:27:02-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{44C70FA4-CA2C-4B10-80CC-F6487A9DB6DF}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;contactview update&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;contactviewupdate&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="11/8/2021" time="7:25 AM"&gt;2021-11-08T07:25:13-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{959284FE-6440-EC11-8C62-001DD80311E9}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS Intake Module for Doc Gen&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSIntakeModuleforDocGen&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="11/2/2021" time="8:40 PM"&gt;2021-11-02T20:40:41-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{511FC122-1D3C-EC11-B6E5-001DD803022C}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Integrations&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Integrations&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.5&lt;/version&gt;
+		&lt;createdon date="11/2/2021" time="9:42 AM"&gt;2021-11-02T09:42:42-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{A0742077-68BE-4DA0-B553-BD24D0DE4984}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;mcs_qa_patch&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;mcs_qa_patch&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.1.10&lt;/version&gt;
+		&lt;createdon date="10/23/2021" time="5:27 AM"&gt;2021-10-23T05:27:49-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{039C03F5-C133-EC11-B6E5-001DD8029B3D}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;_MCSHHS_Config_KNR&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;_MCSHHS_Config_KNR&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.2&lt;/version&gt;
+		&lt;createdon date="10/21/2021" time="7:34 PM"&gt;2021-10-21T19:34:23-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{92E9B497-961C-40F3-AE87-FAFA750C5263}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Allegation_Config&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Allegation_Config&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="77552" prefix="cr2a7" name="CDS Default Publisher" type="7101"&gt;{E31840E8-F830-4FCD-B0EB-F9FCC31AAF98}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.1&lt;/version&gt;
+		&lt;createdon date="10/19/2021" time="10:05 PM"&gt;2021-10-19T22:05:06-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{30CBC21E-FC94-4B4D-B2EC-889E430470B6}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;DC_Config_WithoutForm&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;DC_Config_WithoutForm&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.0.0.2&lt;/version&gt;
+		&lt;createdon date="10/19/2021" time="12:45 PM"&gt;2021-10-19T12:45:12-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{275E40B9-7004-4D6A-BBF5-E65971096DB6}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_DC_Config&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHH_DC_Config&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.2.0.22&lt;/version&gt;
+		&lt;createdon date="10/6/2021" time="7:27 AM"&gt;2021-10-06T07:27:17-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2DFB2276-B7D1-4E86-A488-5C776C5E2EAD}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSSitemap&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSSitemap&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.4.5&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:38 PM"&gt;2021-09-24T12:38:15-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{2913C964-29FB-4A17-89CE-70889D33BDEF}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSDashboards&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSDashboards&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.5.12&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:36 PM"&gt;2021-09-24T12:36:41-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{63B83303-C329-49C2-9158-E6085090D63D}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSPlugins&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSPlugins&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.5.22&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:34 PM"&gt;2021-09-24T12:34:00-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{B2FDEC03-1864-49E6-8B40-A00DE4590845}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHActions&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHActions&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.1.4&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:31 PM"&gt;2021-09-24T12:31:53-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{23D7E803-35B9-4B60-930C-002619A3B213}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_Workflows&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_Workflows&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.2.0.1&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:21 PM"&gt;2021-09-24T12:21:20-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{F79EBD7B-8347-4E1D-AD4B-3074ECC0CB8B}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSSecurityRoles&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSSecurityRoles&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.5.12&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="12:04 PM"&gt;2021-09-24T12:04:05-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{049A658C-5C03-4FFE-883C-A84F5576723F}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSEmailTemplates&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHSEmailTemplates&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.4.3&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="11:49 AM"&gt;2021-09-24T11:49:40-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{72277D50-3BC7-4B63-BF45-AEB8E6A40025}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHSConfig&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCS_HHS_Config&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.1.1.12&lt;/version&gt;
+		&lt;createdon date="9/24/2021" time="9:22 AM"&gt;2021-09-24T09:22:48-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{47FB4D13-2AC6-4BB2-BA87-FCBCB7D41661}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;MCSHHS_WebResources&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;MCSHHS_WebResources&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="95092" prefix="mcshhs" name="MCS Health Human Services" type="7101"&gt;{E9C5E703-3B2E-4CD5-8251-B0326CA57AC7}&lt;/publisherid&gt;
+		&lt;solutionpackageversion&gt;9.2&lt;/solutionpackageversion&gt;
+		&lt;version&gt;1.2.1.23&lt;/version&gt;
+		&lt;createdon date="9/23/2021" time="11:23 AM"&gt;2021-09-23T11:23:23-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{7B1011D9-4FDF-465B-82C3-92425482BCA8}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Common Data Services Default Solution&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Cr8b107&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="12831" prefix="cr4a9" name="CDS Default Publisher" type="7101"&gt;{00000001-0000-0000-0000-00000000005A}&lt;/publisherid&gt;
+		&lt;version&gt;1.0.0.0&lt;/version&gt;
+		&lt;createdon date="9/20/2021" time="4:27 PM"&gt;2021-09-20T16:27:25-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{00000001-0000-0000-0001-00000000009B}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Active Solution&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Active&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="10000" prefix="new" name="Default Publisher for orgbb2cb57b" type="7101"&gt;{D21AAB71-79E7-11DD-8874-00188B01E34F}&lt;/publisherid&gt;
+		&lt;version&gt;1.0&lt;/version&gt;
+		&lt;createdon date="9/20/2021" time="4:09 PM"&gt;2021-09-20T16:09:31-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{FD140AAE-4DF4-11DD-BD17-0019B9312238}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Default Solution&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Default&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="10000" prefix="new" name="Default Publisher for orgbb2cb57b" type="7101"&gt;{D21AAB71-79E7-11DD-8874-00188B01E34F}&lt;/publisherid&gt;
+		&lt;version&gt;1.0&lt;/version&gt;
+		&lt;createdon date="9/20/2021" time="4:09 PM"&gt;2021-09-20T16:09:31-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{FD140AAF-4DF4-11DD-BD17-0019B9312238}&lt;/solutionid&gt;
+	&lt;/result&gt;
+	&lt;result&gt;
+		&lt;friendlyname&gt;Basic Solution&lt;/friendlyname&gt;
+		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
+		&lt;uniquename&gt;Basic&lt;/uniquename&gt;
+		&lt;ismanaged name="Unmanaged"&gt;0&lt;/ismanaged&gt;
+		&lt;publisherid optionvalueprefix="0" prefix="" name="MicrosoftCorporation" type="7101"&gt;{D21AAB70-79E7-11DD-8874-00188B01E34F}&lt;/publisherid&gt;
+		&lt;version&gt;1.0&lt;/version&gt;
+		&lt;createdon date="9/20/2021" time="4:09 PM"&gt;2021-09-20T16:09:31-00:00&lt;/createdon&gt;
+		&lt;solutionid&gt;{25A01723-9F63-4449-A3E0-046CC23A2902}&lt;/solutionid&gt;
+	&lt;/result&gt;
+&lt;/resultset&gt;</value>
+  </data>
+</root>
