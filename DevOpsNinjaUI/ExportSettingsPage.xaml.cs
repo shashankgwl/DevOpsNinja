@@ -1,5 +1,7 @@
 ﻿using DevOpsNinjaUI.Models;
 using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.ObjectModel;
@@ -498,15 +500,24 @@ ClientSecret={this.ClientSecretExport}";
                 {
                     svcImport.OrganizationWebProxyClient.InnerChannel.OperationTimeout = TimeSpan.FromHours(8);
                     await AddProgressText($"Connected to {svcImport.ConnectedOrgFriendlyName}");
+                    var importJobId = Guid.NewGuid();
                     var importRequest = new ImportSolutionRequest
                     {
                         CustomizationFile = File.ReadAllBytes(importedfile),
                         HoldingSolution = step.IsUpgrade,
-                        //ImportJobId = Guid.NewGuid(),
+                        ImportJobId = importJobId,
                     };
-                    await AddProgressText($"Import of solution {step.SelectedSolutionUniqueName} started.");
 
-                    svcImport.Execute(importRequest);
+                    var asyncRequest = new ExecuteAsyncRequest
+                    {
+                        Request = importRequest
+                    };
+
+                    await AddProgressText($"Import of solution {step.SelectedSolutionUniqueName} started. Import job ID {importJobId}");
+
+                    svcImport.Execute(asyncRequest);
+                    await WaitForImportComplete(svcImport, importJobId);
+
                     await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} complete.");
                     await AddProgressText($"import time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
                     stopWatch.Restart();
@@ -535,6 +546,32 @@ ClientSecret={this.ClientSecretExport}";
             }
         }
 
+        private async Task WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId)
+        {
+            do
+            {
+                try
+                {
+                    var job = svcImport.Retrieve("importjob", importJobId, new ColumnSet(true));
+
+                    if (job.Contains("progress"))
+                    {
+                        await AddProgressText($"total Prorgress {job["progress"]}");
+                    }
+
+                    if (job.Contains("completedon"))
+                    {
+                        break;
+                    }
+                }
+                catch
+                {
+                }
+
+                Thread.Sleep(10000);
+            } while (true);
+        }
+
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             if (this.StepCollection == null || this.StepCollection.Count() <= 0)
@@ -552,5 +589,4 @@ ClientSecret={this.ClientSecretExport}";
             Clipboard.SetText(txtProgress.Text);
         }
     }
-
 }

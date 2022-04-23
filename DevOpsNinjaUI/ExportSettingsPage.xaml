@@ -100,9 +100,16 @@
                 </HeaderedItemsControl>
             </ScrollViewer>
 
-           
+            <Grid Grid.Row="5">
+                <Button x:Name="btnImport" Grid.Column="0" Content="Import" Click="btnImport_Click"/>
+                <Button x:Name="btnCopy" Grid.Column="1" Content="Copy logs" Click="btnCopyLogs_Click"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+            </Grid>
 
-            <Button x:Name="btnImport" Grid.Row="5" Content="Import" Click="btnImport_Click"/>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
