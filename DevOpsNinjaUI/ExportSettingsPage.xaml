@@ -99,7 +99,22 @@
                     </ItemsControl.ItemTemplate>
                 </HeaderedItemsControl>
             </ScrollViewer>
-
+            <ItemsControl Grid.Row="4" ItemsSource="{Binding}" x:Name="lstProgressMeter">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox IsReadOnly="True" Grid.Column="0" Text="{Binding SolutionName}"/>
+                            <TextBox IsReadOnly="True" Grid.Column="1" Text="{Binding ProgressValue}"/>
+                            <ProgressBar Grid.Column="2" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <Grid Grid.Row="5">
                 <Button x:Name="btnImport" Grid.Column="0" Content="Import" Click="btnImport_Click"/>
                 <Button x:Name="btnCopy" Grid.Column="1" Content="Copy logs" Click="btnCopyLogs_Click"/>

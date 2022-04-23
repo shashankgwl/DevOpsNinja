@@ -40,7 +40,7 @@ namespace DevOpsNinjaUI.Models
 
         public float ProgressValue { get; set; }
 
-        public bool IsImportComplete { get; set; }
+        public string Status { get; set; }
     }
 
     public class AddSetpItemEventArgs : EventArgs

@@ -453,12 +453,19 @@ ClientSecret={this.ClientSecretExport}";
                 return;
             }
 
+            ////if (null == this.ProgressTracker)
+            ////{
+            ////    this.ProgressTracker = new ObservableCollection<ProgressIndicator>();
+            ////}
+
+
             btnImport.IsEnabled = false;
             await AddProgressText("Please wait...");
             await Task.Factory.StartNew(async () =>
             {
                 var currentRunDirectory = $"{GetFolderPath(SpecialFolder.LocalApplicationData)}\\DevOpsNinja\\{Guid.NewGuid()}\\";
                 await AddProgressText($"Exporting solutions to {currentRunDirectory}");
+                await OnDispatcher(() => { lstProgressMeter.ItemsSource = this.ProgressTracker; });
                 foreach (var step in this.StepCollection)
                 {
                     await ImportSolutionAsyncRequest(step, currentRunDirectory);
@@ -501,6 +508,17 @@ ClientSecret={this.ClientSecretExport}";
                     svcImport.OrganizationWebProxyClient.InnerChannel.OperationTimeout = TimeSpan.FromHours(8);
                     await AddProgressText($"Connected to {svcImport.ConnectedOrgFriendlyName}");
                     var importJobId = Guid.NewGuid();
+
+                    ////await OnDispatcher(() =>
+                    ////{
+                    ////    this.ProgressTracker.Add(new ProgressIndicator
+                    ////    {
+                    ////        SolutionName = step.SelectedSolutionUniqueName,
+                    ////        ProgressValue = 0.0F
+                    ////    });
+                    ////});
+
+
                     var importRequest = new ImportSolutionRequest
                     {
                         CustomizationFile = File.ReadAllBytes(importedfile),
@@ -516,7 +534,7 @@ ClientSecret={this.ClientSecretExport}";
                     await AddProgressText($"Import of solution {step.SelectedSolutionUniqueName} started. Import job ID {importJobId}");
 
                     svcImport.Execute(asyncRequest);
-                    await WaitForImportComplete(svcImport, importJobId);
+                    await WaitForImportComplete(svcImport, importJobId, step.SelectedSolutionUniqueName);
 
                     await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} complete.");
                     await AddProgressText($"import time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
@@ -546,7 +564,7 @@ ClientSecret={this.ClientSecretExport}";
             }
         }
 
-        private async Task WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId)
+        private async Task WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId, string solutionName)
         {
             do
             {
@@ -556,7 +574,21 @@ ClientSecret={this.ClientSecretExport}";
 
                     if (job.Contains("progress"))
                     {
-                        await AddProgressText($"total Prorgress {job["progress"]}");
+                        await OnDispatcher(() =>
+                        {
+                            var progItem = new ProgressIndicator
+                            {
+                                ProgressValue = float.Parse(job["progress"].ToString()),
+                                SolutionName = solutionName,
+                                Status = float.Parse(job["progress"].ToString()) == 100f ? "Complete" : "Running"
+                            };
+
+                            var progCollection = new ObservableCollection<ProgressIndicator>();
+                            progCollection.Add(progItem);
+
+                            this.lstProgressMeter.ItemsSource = progCollection;
+                        });
+
                     }
 
                     if (job.Contains("completedon"))
