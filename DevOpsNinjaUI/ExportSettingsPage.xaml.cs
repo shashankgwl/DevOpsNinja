@@ -697,6 +697,7 @@ ClientSecret={this.ClientSecretExport}";
 
             this.StepCollection.Clear();
             lstSteps.ItemsSource = this.StepCollection;
+            lstProgressMeter.ItemsSource = null;
             txtProgress.Clear();
         }
 

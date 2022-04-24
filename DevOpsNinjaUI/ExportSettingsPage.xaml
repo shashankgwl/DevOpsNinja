@@ -110,6 +110,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox IsReadOnly="True" Grid.Column="0" Text="{Binding SolutionName}"/>
                             <TextBox IsReadOnly="True" Grid.Column="1" Text="{Binding ProgressValue}"/>
+                            <TextBox IsReadOnly="True" Grid.Column="2" Text="{Binding Status}"/>
                             <ProgressBar Grid.Column="2" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
                         </Grid>
                     </DataTemplate>
