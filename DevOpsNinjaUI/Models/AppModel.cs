@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DevOpsNinjaUI.Models
 {
@@ -34,13 +35,30 @@ namespace DevOpsNinjaUI.Models
         public string ParentSolutionName { get; set; }
     }
 
-    public class ProgressIndicator
+    public class ProgressIndicator  : INotifyPropertyChanged
     {
         public string SolutionName { get; set; }
 
         public float ProgressValue { get; set; }
 
         public string Status { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        public void NotifyAll()
+        {
+            NotifyPropertyChanged("SolutionName");
+            NotifyPropertyChanged("ProgressValue");
+            NotifyPropertyChanged("Status");
+        }
     }
 
     public class AddSetpItemEventArgs : EventArgs

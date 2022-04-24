@@ -9,6 +9,7 @@ namespace DevOpsNinjaUI
     using Newtonsoft.Json;
     using System;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics;
     using System.IO;
@@ -456,11 +457,12 @@ ClientSecret={this.ClientSecretExport}";
                 return;
             }
 
-            ////if (null == this.ProgressTracker)
-            ////{
-            ////    this.ProgressTracker = new ObservableCollection<ProgressIndicator>();
-            ////}
+            if (null == this.ProgressTracker)
+            {
+                this.ProgressTracker = new ObservableCollection<ProgressIndicator>();
+            }
 
+            this.ProgressTracker.Clear();
 
             btnImport.IsEnabled = false;
             var importSucessful = true;
@@ -529,15 +531,7 @@ ClientSecret={this.ClientSecretExport}";
                     await AddProgressText($"Connected to {svcImport.ConnectedOrgFriendlyName}");
                     var importJobId = Guid.NewGuid();
 
-                    ////await OnDispatcher(() =>
-                    ////{
-                    ////    this.ProgressTracker.Add(new ProgressIndicator
-                    ////    {
-                    ////        SolutionName = step.SelectedSolutionUniqueName,
-                    ////        ProgressValue = 0.0F
-                    ////    });
-                    ////});
-
+                    await AddNewProgressItem(step);
 
                     var importRequest = new ImportSolutionRequest
                     {
@@ -593,23 +587,36 @@ ClientSecret={this.ClientSecretExport}";
             }
         }
 
+        private async Task AddNewProgressItem(AddSetpItemEventArgs step)
+        {
+            await OnDispatcher(() =>
+            {
+                var progressItem = new ProgressIndicator
+                {
+                    SolutionName = step.SelectedSolutionUniqueName,
+                    ProgressValue = 0.0F,
+                    Status = "Queued"
+                };
+
+                this.ProgressTracker.Add(progressItem);
+                this.lstProgressMeter.ItemsSource = this.ProgressTracker;
+                progressItem.NotifyAll();
+            });
+        }
+
         private async Task<dynamic> FailedResponse(AddSetpItemEventArgs step, dynamic importResponse)
         {
             await AddProgressText($"Import failed with below message");
             await AddProgressText($"{importResponse.Message}");
             await OnDispatcher(() =>
             {
-                var progItem = new ProgressIndicator
+                var progItem = this.ProgressTracker.FirstOrDefault(item => item.SolutionName == step.SelectedSolutionUniqueName);
+                if (progItem != null)
                 {
-                    ProgressValue = 0f,
-                    SolutionName = step.SelectedSolutionUniqueName,
-                    Status = "Failed"
-                };
-
-                var progCollection = new ObservableCollection<ProgressIndicator>();
-                progCollection.Add(progItem);
-
-                this.lstProgressMeter.ItemsSource = progCollection;
+                    progItem.ProgressValue = 0f;
+                    progItem.Status = "Failed";
+                    progItem.NotifyAll();
+                }
             });
             return importResponse;
         }
@@ -622,29 +629,43 @@ ClientSecret={this.ClientSecretExport}";
                 try
                 {
                     var job = svcImport.Retrieve("importjob", importJobId, new ColumnSet(true));
+                    var progItem = this.ProgressTracker.FirstOrDefault(item => item.SolutionName == solutionName);
 
                     if (job.Contains("progress"))
                     {
                         await OnDispatcher(() =>
                         {
-                            var progItem = new ProgressIndicator
+                            if (progItem != null)
                             {
-                                ProgressValue = float.Parse(job["progress"].ToString()),
-                                SolutionName = solutionName,
-                                Status = float.Parse(job["progress"].ToString()) == 100f ? "Complete" : "Running"
-                            };
-
-                            var progCollection = new ObservableCollection<ProgressIndicator>();
-                            progCollection.Add(progItem);
-
-                            this.lstProgressMeter.ItemsSource = progCollection;
+                                progItem.ProgressValue = float.Parse(job["progress"].ToString());
+                                progItem.Status = "Importing";
+                                progItem.NotifyAll();
+                            }
                         });
-
                     }
 
                     if (job.Contains("completedon"))
                     {
                         importResponse = this.CheckeFailureAndReturnMessage(job["data"].ToString());
+                        if (!importResponse.Success)
+                        {
+                            if (progItem != null)
+                            {
+                                progItem.ProgressValue = 0f;
+                                progItem.Status = "Failed";
+                                progItem.NotifyAll();
+                            }
+                        }
+
+                        else
+                        {
+                            if (progItem != null)
+                            {
+                                progItem.ProgressValue = float.Parse(job["progress"].ToString()); ;
+                                progItem.Status = "Completed";
+                                progItem.NotifyAll();
+                            }
+                        }
                         break;
                     }
                 }
@@ -704,27 +725,62 @@ ClientSecret={this.ClientSecretExport}";
         private void btnCopyLogs_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(txtProgress.Text);
-            //// TestMethod();
+            ////TestMethod();
 
         }
-        public static string XmlUnescape(string escaped)
-        {
-            if (escaped == null) return null;
-            return JsonConvert.DeserializeObject(escaped, typeof(string)).ToString();
-        }
-
 
         private void TestMethod()
         {
-            var xml = XDocument.Parse(@RESX.Resources.TestResult);
-
-            var root = xml.Document.Elements(XName.Get("importexportxml ")).FirstOrDefault();
-            if (root != null)
+            this.ProgressTracker = new ObservableCollection<ProgressIndicator>
             {
-                var kk = root.Attributes(XName.Get("succeeded")).FirstOrDefault().Value;
-            }
+                new ProgressIndicator
+                {
+                    ProgressValue = 10,
+                    SolutionName ="test",
+                    Status = "Running"
+                },
+
+                new ProgressIndicator
+                {
+                    ProgressValue = 10,
+                    SolutionName ="test1",
+                    Status = "Running"
+                },
+                new ProgressIndicator
+                {
+                    ProgressValue = 10,
+                    SolutionName ="test2",
+                    Status = "Complte"
+                },
+
+                new ProgressIndicator
+                {
+                    ProgressValue = 10,
+                    SolutionName ="tes3",
+                    Status = "Failed"
+                },
+
+                new ProgressIndicator
+                {
+                    ProgressValue = 10,
+                    SolutionName ="test4",
+                    Status = "Running"
+                },
+            };
 
 
+            lstProgressMeter.ItemsSource = this.ProgressTracker;
+
+        }
+
+        private void btnCopy1_Click(object sender, RoutedEventArgs e)
+        {
+            var failed = this.ProgressTracker.First(item => item.Status == "Failed");
+            failed.Status = "Complete";
+            failed.ProgressValue = 100f;
+            failed.NotifyPropertyChanged("status");
+            failed.NotifyPropertyChanged("ProgressValue");
+            lstProgressMeter.ItemsSource = this.ProgressTracker;
         }
     }
 }

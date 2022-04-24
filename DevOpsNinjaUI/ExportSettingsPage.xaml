@@ -47,7 +47,7 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="btnSelectSolution" Content="Close and begin export" Grid.Row="3" Click="btnSelectSolution_Click"/>
+                <Button x:Name="btnSelectSolution" Content="Export Solutions" Grid.Row="3" Click="btnSelectSolution_Click"/>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.3*" />
@@ -99,7 +99,7 @@
                     </ItemsControl.ItemTemplate>
                 </HeaderedItemsControl>
             </ScrollViewer>
-            <ItemsControl Grid.Row="4" ItemsSource="{Binding}" x:Name="lstProgressMeter">
+            <ItemsControl Grid.Row="4" ItemsSource="{Binding Path=ProgressTracker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="lstProgressMeter">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -107,11 +107,12 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <TextBox IsReadOnly="True" Grid.Column="0" Text="{Binding SolutionName}"/>
                             <TextBox IsReadOnly="True" Grid.Column="1" Text="{Binding ProgressValue}"/>
                             <TextBox IsReadOnly="True" Grid.Column="2" Text="{Binding Status}"/>
-                            <ProgressBar Grid.Column="2" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
+                            <ProgressBar Grid.Column="3" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -119,11 +120,13 @@
             <Grid Grid.Row="5">
                 <Button x:Name="btnImport" Grid.Column="0" Content="Import" Click="btnImport_Click"/>
                 <Button x:Name="btnCopy" Grid.Column="1" Content="Copy logs" Click="btnCopyLogs_Click"/>
+                <!--<Button x:Name="btnCopy1" Grid.Column="2" Content="Copy logs" Click="btnCopy1_Click"/>-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <!--<ColumnDefinition/>-->
                 </Grid.ColumnDefinitions>
-                
+
             </Grid>
 
 
