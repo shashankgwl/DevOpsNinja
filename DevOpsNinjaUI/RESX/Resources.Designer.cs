@@ -79,13 +79,7 @@ namespace DevOpsNinjaUI.RESX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;resultset morerecords=&quot;0&quot; paging-cookie=&quot;&amp;lt;cookie page=&amp;quot;1&amp;quot;&amp;gt;&amp;lt;createdon last=&amp;quot;2021-09-20T16:09:31-00:00&amp;quot; first=&amp;quot;2022-03-23T16:54:58-00:00&amp;quot; /&amp;gt;&amp;lt;solutionid last=&amp;quot;{25A01723-9F63-4449-A3E0-046CC23A2902}&amp;quot; first=&amp;quot;{7D8620F2-C9AA-EC11-B3FE-001DD8030A8D}&amp;quot; /&amp;gt;&amp;lt;/cookie&amp;gt;&quot;&gt;
-        ///	&lt;result&gt;
-        ///		&lt;friendlyname&gt;SHASHANK TEST&lt;/friendlyname&gt;
-        ///		&lt;isapimanaged&gt;0&lt;/isapimanaged&gt;
-        ///		&lt;uniquename&gt;SHASHANKTEST&lt;/uniquename&gt;
-        ///		&lt;ismanaged name=&quot;Unmanaged&quot;&gt;0&lt;/ismanaged&gt;
-        ///		 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;importexportxml start=&quot;637863471582752120&quot; stop=&quot;637863471662440591&quot; progress=&quot;1.23674911660777&quot; processed=&quot;true&quot; errorcode=&quot;-2147188685&quot; succeeded=&quot;failure&quot; status=&quot;Solution manifest import: FAILURE: The following solution cannot be imported: MCSHHS_STAAND_Workflows. Some dependencies are missing. The missing dependencies are : &amp;lt;MissingDependencies&amp;gt;&amp;lt;MissingDependency&amp;gt;&amp;lt;Required type=&amp;quot;1&amp;quot; schemaName=&amp;quot;mcshhs_brbappointmentconfig&amp;quot; displayName=&amp;quot;BRB Appointment Config&amp;quot [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TestResult {
             get {

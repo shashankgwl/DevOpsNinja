@@ -1,24 +1,27 @@
-﻿using DevOpsNinjaUI.Models;
-using Microsoft.Crm.Sdk.Messages;
-using Microsoft.Xrm.Sdk.Messages;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Tooling.Connector;
-using System;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.ServiceModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Xml.Linq;
-using static System.Environment;
-
+﻿
 namespace DevOpsNinjaUI
 {
+    using DevOpsNinjaUI.Models;
+    using Microsoft.Crm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk.Query;
+    using Microsoft.Xrm.Tooling.Connector;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Security;
+    using System.ServiceModel;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Xml.Linq;
+    using static System.Environment;
     /// <summary>
     /// Interaction logic for ExportSettingsPage.xaml
     /// </summary>
@@ -460,6 +463,7 @@ ClientSecret={this.ClientSecretExport}";
 
 
             btnImport.IsEnabled = false;
+            var importSucessful = true;
             await AddProgressText("Please wait...");
             await Task.Factory.StartNew(async () =>
             {
@@ -468,16 +472,32 @@ ClientSecret={this.ClientSecretExport}";
                 await OnDispatcher(() => { lstProgressMeter.ItemsSource = this.ProgressTracker; });
                 foreach (var step in this.StepCollection)
                 {
-                    await ImportSolutionAsyncRequest(step, currentRunDirectory);
+                    var importResponse = await ImportSolutionAsyncRequest(step, currentRunDirectory);
+                    if (importResponse != null)
+                    {
+                        if (!importResponse.Success)
+                        {
+                            importSucessful = false;
+                            break;
+                        }
+                    }
                 }
             });
 
+
             btnImport.IsEnabled = true;
             btnImport.Content = "Import";
-            txtProgress.Text += $"All solutions imported" + System.Environment.NewLine;
+            if (importSucessful)
+            {
+                await AddProgressText($"All solutions imported{ System.Environment.NewLine}");
+            }
+            else
+            {
+                await AddProgressText($"Import failed.");
+            }
         }
 
-        private async Task ImportSolutionAsyncRequest(AddSetpItemEventArgs step, string currentRunDirectory)
+        private async Task<dynamic> ImportSolutionAsyncRequest(AddSetpItemEventArgs step, string currentRunDirectory)
         {
             string importedfile = string.Empty;
             var stopWatch = new Stopwatch();
@@ -534,7 +554,14 @@ ClientSecret={this.ClientSecretExport}";
                     await AddProgressText($"Import of solution {step.SelectedSolutionUniqueName} started. Import job ID {importJobId}");
 
                     svcImport.Execute(asyncRequest);
-                    await WaitForImportComplete(svcImport, importJobId, step.SelectedSolutionUniqueName);
+                    var importResponse = await WaitForImportComplete(svcImport, importJobId, step.SelectedSolutionUniqueName);
+                    if (importResponse != null)
+                    {
+                        if (!importResponse.Success)
+                        {
+                            return await FailedResponse(step, importResponse);
+                        }
+                    }
 
                     await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} complete.");
                     await AddProgressText($"import time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
@@ -542,8 +569,8 @@ ClientSecret={this.ClientSecretExport}";
 
                     if (step.IsUpgrade)
                     {
-                        await AddProgressText($"Taking a break of 5 mins before upgrade.");
-                        Thread.Sleep(TimeSpan.FromMinutes(5));
+                        await AddProgressText($"Taking a break of 1 min before upgrade.");
+                        Thread.Sleep(TimeSpan.FromMinutes(1));
                         await AddProgressText($"Applying solution upgrade for the solution {step.SelectedSolutionUniqueName}");
                         var deleteAndPromoteRequest = new DeleteAndPromoteRequest
                         {
@@ -556,16 +583,40 @@ ClientSecret={this.ClientSecretExport}";
                     }
 
                     await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} completed");
+                    return importResponse;
                 }
             }
             catch (Exception ex)
             {
                 await AddProgressText(ex.Message);
+                return null;
             }
         }
 
-        private async Task WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId, string solutionName)
+        private async Task<dynamic> FailedResponse(AddSetpItemEventArgs step, dynamic importResponse)
         {
+            await AddProgressText($"Import failed with below message");
+            await AddProgressText($"{importResponse.Message}");
+            await OnDispatcher(() =>
+            {
+                var progItem = new ProgressIndicator
+                {
+                    ProgressValue = 0f,
+                    SolutionName = step.SelectedSolutionUniqueName,
+                    Status = "Failed"
+                };
+
+                var progCollection = new ObservableCollection<ProgressIndicator>();
+                progCollection.Add(progItem);
+
+                this.lstProgressMeter.ItemsSource = progCollection;
+            });
+            return importResponse;
+        }
+
+        private async Task<dynamic> WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId, string solutionName)
+        {
+            dynamic importResponse = null;
             do
             {
                 try
@@ -593,15 +644,48 @@ ClientSecret={this.ClientSecretExport}";
 
                     if (job.Contains("completedon"))
                     {
+                        importResponse = this.CheckeFailureAndReturnMessage(job["data"].ToString());
                         break;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    return new
+                    {
+                        Success = false,
+                        Message = ex.Message
+                    };
                 }
 
                 Thread.Sleep(10000);
             } while (true);
+
+            return importResponse;
+        }
+
+        private object CheckeFailureAndReturnMessage(string xmlData)
+        {
+            if (string.IsNullOrEmpty(xmlData))
+            {
+                return null;
+            }
+
+            var xml = XDocument.Parse(xmlData);
+            string failedText = string.Empty;
+            if (xml != null && xml.Document != null && xml.Document.Element(XName.Get("importexportxml")) != null)
+            {
+                var failureMessage = xml.FirstNode.Document.Element("importexportxml").Attribute("succeeded");
+                if (failureMessage != null && failureMessage.Value == "failure")
+                {
+                    failedText = xml.FirstNode.Document.Element("importexportxml").Attribute("status").Value;
+                }
+            }
+
+            return new
+            {
+                Success = failedText.Length == 0,
+                Message = failedText
+            };
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -619,6 +703,27 @@ ClientSecret={this.ClientSecretExport}";
         private void btnCopyLogs_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(txtProgress.Text);
+            //// TestMethod();
+
+        }
+        public static string XmlUnescape(string escaped)
+        {
+            if (escaped == null) return null;
+            return JsonConvert.DeserializeObject(escaped, typeof(string)).ToString();
+        }
+
+
+        private void TestMethod()
+        {
+            var xml = XDocument.Parse(@RESX.Resources.TestResult);
+
+            var root = xml.Document.Elements(XName.Get("importexportxml ")).FirstOrDefault();
+            if (root != null)
+            {
+                var kk = root.Attributes(XName.Get("succeeded")).FirstOrDefault().Value;
+            }
+
+
         }
     }
 }
