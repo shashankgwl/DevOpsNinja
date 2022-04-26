@@ -3,6 +3,7 @@ namespace DevOpsNinjaUI
 {
     using DevOpsNinjaUI.Models;
     using Microsoft.Crm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Messages;
     using Microsoft.Xrm.Sdk.Query;
     using Microsoft.Xrm.Tooling.Connector;
@@ -354,7 +355,7 @@ ClientSecret={this.ClientSecretExport}";
 
         async Task AddProgressText(string text)
         {
-            Dispatcher.Invoke((Action)(() =>
+            Dispatcher.Invoke((Action)(async () =>
             {
                 txtProgress.Text += $"{text}{System.Environment.NewLine}";
             }));
@@ -466,6 +467,8 @@ ClientSecret={this.ClientSecretExport}";
 
             btnImport.IsEnabled = false;
             var importSucessful = true;
+            var stopWatchOverall = new Stopwatch();
+            stopWatchOverall.Start();
             await AddProgressText("Please wait...");
             await Task.Factory.StartNew(async () =>
             {
@@ -497,6 +500,9 @@ ClientSecret={this.ClientSecretExport}";
             {
                 await AddProgressText($"Import failed.");
             }
+
+            await AddProgressText($"Overall time taken for import is { stopWatchOverall.Elapsed.Hours}hrs : { stopWatchOverall.Elapsed.Minutes}mins : { stopWatchOverall.Elapsed.Seconds}seconds");
+            stopWatchOverall.Stop();
         }
 
         private async Task<dynamic> ImportSolutionAsyncRequest(AddSetpItemEventArgs step, string currentRunDirectory)
@@ -512,7 +518,7 @@ ClientSecret={this.ClientSecretExport}";
                     await AddProgressText($"Connected to {svc.ConnectedOrgFriendlyName}");
                     svc.OrganizationWebProxyClient.InnerChannel.OperationTimeout = TimeSpan.FromHours(8);
                     importedfile = await ExportSolutions(new string[] { step.SelectedSolutionUniqueName }, svc, currentRunDirectory);
-                    await AddProgressText($"export time for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
+                    await AddProgressText($"export time for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours}hrs :{stopWatch.Elapsed.Minutes}mins : {stopWatch.Elapsed.Seconds}seconds");
                     stopWatch.Restart();
                 }
             }
@@ -558,7 +564,7 @@ ClientSecret={this.ClientSecretExport}";
                     }
 
                     await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} complete.");
-                    await AddProgressText($"import time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
+                    await AddProgressText($"import time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours}hrs :{stopWatch.Elapsed.Minutes}mins : {stopWatch.Elapsed.Seconds}seconds");
                     stopWatch.Restart();
 
                     if (step.IsUpgrade)
@@ -571,7 +577,24 @@ ClientSecret={this.ClientSecretExport}";
                             UniqueName = step.SelectedSolutionUniqueName,
                         };
 
-                        svcImport.Execute(deleteAndPromoteRequest);
+                        var asyncRequestUpgrade = new ExecuteAsyncRequest
+                        {
+                            Request = deleteAndPromoteRequest
+                        };
+
+                        await AddNewProgressItem(step, step.SelectedSolutionUniqueName + " -Upgrade");
+                        var response = svcImport.Execute(asyncRequestUpgrade) as ExecuteAsyncResponse;
+                        var upgradeRequestId = response.AsyncJobId;
+                        var upgradeResponse = await this.WaitForUpgradeComplete(svcImport, upgradeRequestId, step.SelectedSolutionUniqueName + " -Upgrade");
+
+                        if (upgradeResponse != null)
+                        {
+                            if (!upgradeResponse.Success)
+                            {
+                                return await FailedResponse(step, upgradeResponse);
+                            }
+                        }
+
                         await AddProgressText($"Apply solution upgrade complete.");
                         await AddProgressText($"solution upgrade time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
                     }
@@ -583,17 +606,21 @@ ClientSecret={this.ClientSecretExport}";
             catch (Exception ex)
             {
                 await AddProgressText(ex.Message);
-                return null;
+                return new
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
             }
         }
 
-        private async Task AddNewProgressItem(AddSetpItemEventArgs step)
+        private async Task AddNewProgressItem(AddSetpItemEventArgs step, string solutionName = "")
         {
             await OnDispatcher(() =>
             {
                 var progressItem = new ProgressIndicator
                 {
-                    SolutionName = step.SelectedSolutionUniqueName,
+                    SolutionName = string.IsNullOrEmpty(solutionName) ? step.SelectedSolutionUniqueName : solutionName,
                     ProgressValue = 0.0F,
                     Status = "Queued"
                 };
@@ -621,6 +648,110 @@ ClientSecret={this.ClientSecretExport}";
             return importResponse;
         }
 
+        private string GetStatusTextByCode(int code)
+        {
+            switch (code)
+            {
+                case 0:
+                    return "Waiting For Resources";
+                case 10:
+                    return "Waiting";
+                case 20:
+                    return "In Progress";
+                case 21:
+                    return "Pausing";
+                case 22:
+                    return "Canceling";
+                case 30:
+                    return "Succeeded";
+                case 31:
+                    return "Failed";
+                case 32:
+                    return "Canceled";
+                default:
+                    return "NOSTATUS";
+            }
+        }
+
+        private async Task<dynamic> WaitForUpgradeComplete(CrmServiceClient svcImport, Guid upgradeJobId, string solutionName)
+        {
+            ////dynamic importResponse = null;
+            do
+            {
+                try
+                {
+                    var job = svcImport.Retrieve("asyncoperation", upgradeJobId, new ColumnSet(true));
+                    var progItem = this.ProgressTracker.FirstOrDefault(item => item.SolutionName == solutionName);
+
+                    if (job.Contains("statuscode"))
+                    {
+                        var code = (job["statuscode"] as OptionSetValue).Value;
+                        var statusCodeText = GetStatusTextByCode(code);
+                        if(code ==30)
+                        {
+                            await OnDispatcher(() =>
+                            {
+                                if (progItem != null)
+                                {
+                                    progItem.ProgressValue = 100f;
+                                    progItem.Status = "Complete";
+                                    progItem.NotifyAll();
+                                }
+                            });
+                            return new
+                            {
+                                Success = true,
+                                Message = "Successful."
+                            };
+                        }
+
+                        else if(code ==31 || code == 32)
+                        {
+                            await OnDispatcher(() =>
+                            {
+                                if (progItem != null)
+                                {
+                                    progItem.ProgressValue = 0;
+                                    progItem.Status = "Failed";
+                                    progItem.NotifyAll();
+                                }
+                            });
+
+                            return new
+                            {
+                                Success = false,
+                                Message = "Failed"
+                            };
+                        }
+
+                        else
+                        {
+                            await OnDispatcher(() =>
+                            {
+                                if (progItem != null)
+                                {
+                                    progItem.ProgressValue = code;
+                                    progItem.Status = statusCodeText;
+                                    progItem.NotifyAll();
+                                }
+                            });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new
+                    {
+                        Success = false,
+                        Message = ex.Message
+                    };
+                }
+
+                Thread.Sleep(10000);
+            } while (true);
+
+            ///return importResponse;
+        }
         private async Task<dynamic> WaitForImportComplete(CrmServiceClient svcImport, Guid importJobId, string solutionName)
         {
             dynamic importResponse = null;
@@ -731,45 +862,12 @@ ClientSecret={this.ClientSecretExport}";
 
         private void TestMethod()
         {
-            this.ProgressTracker = new ObservableCollection<ProgressIndicator>
+            var guid = "202C0C2B-E8C4-EC11-983E-001DD8034FA4";
+            using (var svcImport = new CrmServiceClient(GetConnectionStringImport()))
             {
-                new ProgressIndicator
-                {
-                    ProgressValue = 10,
-                    SolutionName ="test",
-                    Status = "Running"
-                },
+                var job = svcImport.Retrieve("asyncoperation", Guid.Parse(guid), new ColumnSet(true));
 
-                new ProgressIndicator
-                {
-                    ProgressValue = 10,
-                    SolutionName ="test1",
-                    Status = "Running"
-                },
-                new ProgressIndicator
-                {
-                    ProgressValue = 10,
-                    SolutionName ="test2",
-                    Status = "Complte"
-                },
-
-                new ProgressIndicator
-                {
-                    ProgressValue = 10,
-                    SolutionName ="tes3",
-                    Status = "Failed"
-                },
-
-                new ProgressIndicator
-                {
-                    ProgressValue = 10,
-                    SolutionName ="test4",
-                    Status = "Running"
-                },
-            };
-
-
-            lstProgressMeter.ItemsSource = this.ProgressTracker;
+            }
 
         }
 

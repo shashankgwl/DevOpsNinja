@@ -36,6 +36,7 @@ namespace DevOpsNinjaUI
             {
                 parentSolName = value;
                 this.lblParentSolution.Text = value;
+                this.txtDisplayName.Text = value;
             }
         }
 
