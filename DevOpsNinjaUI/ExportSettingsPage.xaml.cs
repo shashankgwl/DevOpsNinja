@@ -446,9 +446,9 @@ ClientSecret={this.ClientSecretExport}";
 
         private async void btnImport_Click(object sender, RoutedEventArgs e)
         {
-            if (drpEnvImport.SelectedItem == null)
+            if (drpEnvImport.SelectedItem == null || this.StepCollection == null || this.StepCollection.Count <= 0)
             {
-                MessageBox.Show("Please select the target environment.");
+                MessageBox.Show("Please select the target environment and solutions.");
                 return;
             }
 
@@ -572,14 +572,12 @@ ClientSecret={this.ClientSecretExport}";
                         await AddProgressText($"Taking a break of 1 min before upgrade.");
                         Thread.Sleep(TimeSpan.FromMinutes(1));
                         await AddProgressText($"Applying solution upgrade for the solution {step.SelectedSolutionUniqueName}");
-                        var deleteAndPromoteRequest = new DeleteAndPromoteRequest
-                        {
-                            UniqueName = step.SelectedSolutionUniqueName,
-                        };
-
                         var asyncRequestUpgrade = new ExecuteAsyncRequest
                         {
-                            Request = deleteAndPromoteRequest
+                            Request = new DeleteAndPromoteRequest
+                            {
+                                UniqueName = step.SelectedSolutionUniqueName,
+                            }
                         };
 
                         await AddNewProgressItem(step, step.SelectedSolutionUniqueName + " -Upgrade");
