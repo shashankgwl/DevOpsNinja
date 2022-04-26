@@ -599,7 +599,6 @@ ClientSecret={this.ClientSecretExport}";
                         await AddProgressText($"solution upgrade time taken for {step.SelectedSolutionUniqueName} = {stopWatch.Elapsed.Hours} :{stopWatch.Elapsed.Minutes} : {stopWatch.Elapsed.Seconds}");
                     }
 
-                    await AddProgressText($"import of solution {step.SelectedSolutionUniqueName} completed");
                     return importResponse;
                 }
             }
@@ -687,7 +686,7 @@ ClientSecret={this.ClientSecretExport}";
                     {
                         var code = (job["statuscode"] as OptionSetValue).Value;
                         var statusCodeText = GetStatusTextByCode(code);
-                        if(code ==30)
+                        if (code == 30)
                         {
                             await OnDispatcher(() =>
                             {
@@ -705,7 +704,7 @@ ClientSecret={this.ClientSecretExport}";
                             };
                         }
 
-                        else if(code ==31 || code == 32)
+                        else if (code == 31 || code == 32)
                         {
                             await OnDispatcher(() =>
                             {
