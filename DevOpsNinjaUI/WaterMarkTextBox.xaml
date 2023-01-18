@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="DevOpsNinjaUI.WaterMarkTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:converter ="clr-namespace:DevOpsNinjaUI.Converters"
+             >
+    <Grid x:Name="LayoutRoot" Background="WhiteSmoke">
+        <Grid.Resources>
+            <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+            <converter:WatermarkConverter x:Key="waterMarker"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock x:Name="lblWaterMark" TextAlignment="Center" Text="Type First Name ..." Foreground="{StaticResource brushWatermarkForeground}">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource waterMarker}">
+                        <Binding ElementName="txtUserEntry" Path="Text.Length" />
+                        <Binding ElementName="txtUserEntry" Path="IsFocused" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox Name="txtUserEntry" TextAlignment="Center" Background="Transparent"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

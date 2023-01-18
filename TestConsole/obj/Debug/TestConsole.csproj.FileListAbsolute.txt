@@ -1,0 +1,8 @@
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\obj\Debug\TestConsole.csproj.AssemblyReference.cache
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\obj\Debug\TestConsole.csproj.SuggestedBindingRedirects.cache
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\obj\Debug\TestConsole.csproj.CoreCompileInputs.cache
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\bin\Debug\TestConsole.exe.config
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\bin\Debug\TestConsole.exe
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\bin\Debug\TestConsole.pdb
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\obj\Debug\TestConsole.exe
+C:\Users\sbhide\source\repos\STAAND\NEWMAIN\src\Deployment\D365.DevOpsNinja\TestConsole\obj\Debug\TestConsole.pdb

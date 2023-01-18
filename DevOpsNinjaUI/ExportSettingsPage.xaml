@@ -1,0 +1,255 @@
+<Window x:Class="DevOpsNinjaUI.ExportSettingsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
+        xmlns:uc="clr-namespace:DevOpsNinjaUI"
+        xmlns:model="clr-namespace:DevOpsNinjaUI.Models"
+        Name="mainWindow"
+        mc:Ignorable="d"
+        Title="Pipeline Settings" Height="800" Width="800">
+    <Window.Resources>
+        <Storyboard x:Key="sbAnimate"/>
+        <ObjectDataProvider x:Key="myEnum" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="model:ExportType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <core:String x:Key="edit">Edit</core:String>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid>
+                <CheckBox Content="Keep my machine awake" Margin="185,0,0,0" Checked="CheckBox_Checked"/>
+                <Label Content="Select source environment" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+
+                    </Grid.ColumnDefinitions>
+                    
+                    <ComboBox x:Name="drpEnv" SelectionChanged="drpEnv_SelectionChanged" Grid.Column="0"/>
+                    <Popup x:Name="popSourceEnv" Width="500" Height="150" PlacementTarget="{Binding ElementName=mainWindow}" Placement="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnClosePopupSource" ToolTip="Close popup" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btnClosePopup_Click">
+                                <Image Source="RESX/closeButton.jpg"/>
+                            </Button>
+                            <!--<Label Grid.Row="0" Content="Paste URL in the textbox below." VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>-->
+                            <uc:WaterMarkTextBox x:Name="txtURLSource" Grid.Row="1" WaterMarkText="Enter a valid URL here."/>
+                            <!--<TextBox Grid.Row="1" Name="txtURL" TextAlignment="Center"/>-->
+                            <Button Grid.Row="2" Name="btnAddEnvironmentSource" Content="Add Environment" Click="btnAddEnvironment_Click"/>
+                        </Grid>
+                    </Popup>
+                    <Button Grid.Column="2" Name="btnAddEnvSource" Content="Add source environment" Click="btnAddEnv_Click"/>
+                    <uc:LoginControl Grid.Column="1" Enabled="False" LoginText="Login Interactive(source)" x:Name="ctlLoginSource"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <ComboBox Name="cmbOpenSettings" Grid.Column="1" SelectionChanged="cmbOpenSettings_SelectionChanged">
+                        <ComboBoxItem Content="Open Settings Default Browser"/>
+                        <ComboBoxItem Content="Open Settings Chrome"/>
+                        <ComboBoxItem Content="Open Settings Opera"/>
+                        <ComboBoxItem Content="Open Settings Firefox"/>
+                    </ComboBox>
+                    <!--<Button x:Name="btnOpenSettings" Content="Open Settings" Grid.Column="1" Click="btnOpenSettings_Click"/>-->
+                    <Button x:Name="btnLoadUnmanaged" Content="Load Unmanaged." Click="btnLoadUnmanaged_Click" Grid.Column="0"/>
+                    <uc:WaterMarkTextBox Grid.Row="1" ToolTip="Filter solution grid" VerticalContentAlignment="Center" FontSize="15" ForceCursor="True" WaterMarkText="Filter name here."  x:Name="txtFilter"/>
+                    <!--<TextBox Grid.Row="1" ToolTip="Filter solution grid" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="15" ForceCursor="True"  Name="txtFilter"/>-->
+                    <Button x:Name="btnfilter" Content="Name Filter (Contains)" Grid.Row="1" Grid.Column="1" Click="btnfilter_Click" />
+                    <Button x:Name="btnCloneToSolution" Content="Clone To Solution (Merge)" Grid.Row="2" Grid.ColumnSpan="2" Click="btnCloneToSolution_Click" />
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <DataGrid Grid.Row="3" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Solutions}" Name="dgSolutions">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn IsReadOnly="False" Header="Seleccted" Binding="{Binding Selected}"/>
+                        <DataGridComboBoxColumn Header="Export Type"
+ItemsSource="{Binding Source={StaticResource myEnum}}" SelectedItemBinding="{Binding SolutionExportType}" />
+                        <!--<DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding SolutionName}"/>-->
+                        <DataGridHyperlinkColumn Binding="{Binding URL}" ContentBinding="{Binding SolutionName}" Header="Name">
+                            <DataGridHyperlinkColumn.ElementStyle>
+                                <Style>
+                                    <EventSetter Event="Hyperlink.Click" Handler="Hyperlink_Click"/>
+                                </Style>
+                            </DataGridHyperlinkColumn.ElementStyle>
+                        </DataGridHyperlinkColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="Display Name" Binding="{Binding FriendlyName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Version" Binding="{Binding SolutionVersion}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Is managed" Binding="{Binding ManagedUnmanaged}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="btnSelectSolution" Content="Export Solutions" Grid.Row="4" Click="btnSelectSolution_Click"/>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Label Content="Select target environment" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"/>
+            <Grid Grid.Row="1">
+                <ComboBox x:Name="drpEnvImport" SelectionChanged="drpEnvImport_SelectionChanged"/>
+                <Button x:Name="btnAddTargetEnv" Content="Add target Environment" Click="btnAddEnv_Click" Grid.Column="1"/>
+                <Popup x:Name="popTargetEnv" Width="500" Height="150" PlacementTarget="{Binding ElementName=mainWindow}" Placement="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="btnClosePopupTarget" ToolTip="Close popup" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btnClosePopup_Click">
+                            <Image Source="RESX/closeButton.jpg"/>
+                        </Button>
+                        <!--<Label Grid.Row="0" Content="Paste URL in the textbox below." VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>-->
+                        <uc:WaterMarkTextBox x:Name="txtURLTarget" Grid.Row="1" WaterMarkText="Enter a valid URL here."/>
+                        <!--<TextBox Grid.Row="1" Name="txtURL" TextAlignment="Center"/>-->
+                        <Button Grid.Row="2" Name="btnAddEnvironmentTarget" Content="Add Environment" Click="btnAddEnvironment_Click"/>
+                    </Grid>
+                </Popup>
+                <!--<CheckBox x:Name="checkConnection" IsChecked="True" Grid.Column="2" VerticalAlignment="Center" Unchecked="checkConnection_Unchecked" Checked="checkConnection_Checked" >
+                    <TextBlock TextWrapping="Wrap"> Use Source Connection</TextBlock></CheckBox>-->
+                <uc:LoginControl Grid.Column="2" Enabled="False" x:Name="ctlLoginTarget" LoginText="Login Interactive(target)"/>
+                <!--<Button x:Name="btnLoginTarget" IsEnabled="False" Grid.Column="1" Content="Login Interactive(target)"/>-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.50*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <!--<ColumnDefinition Width="0.24*"/>-->
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button x:Name="btnAddStep" Content="Add Step" Grid.Column="0" Click="btnAddStep_Click"/>
+                <Button x:Name="btnLoadFolder" Content="Load Folder" Grid.Column="1" Click="btnLoadFolder_Click"/>
+                <Button x:Name="btnClear" Content="Clear" Click="btnClear_Click" Grid.Column="2"/>
+                <ComboBox Name="cmbOpenSettingsTarget" Grid.Column="3" SelectionChanged="cmbOpenSettingsTarget_SelectionChanged">
+                    <ComboBoxItem Content="Open Settings Default Browser"/>
+                    <ComboBoxItem Content="Open Settings Chrome"/>
+                    <ComboBoxItem Content="Open Settings Opera"/>
+                    <ComboBoxItem Content="Open Settings Firefox"/>
+                </ComboBox>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                <HeaderedItemsControl  Name="lstSteps" ItemsSource="{Binding}">
+                    <HeaderedItemsControl.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="A"/>
+                                <Label Content="B"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </HeaderedItemsControl.HeaderTemplate>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBox ToolTip="{Binding Solution.SolutionName}" IsReadOnly="True" Text="{Binding Solution.SolutionName}" Grid.Column="0"/>
+                                <TextBox IsReadOnly="True" Text="{Binding Solution.SolutionVersion}" Grid.Column="1"/>
+                                <TextBox IsReadOnly="True" Text="{Binding Step}" Grid.Column="2"/>
+                                <TextBox IsReadOnly="True" Text="{Binding UpgradeMessage}" Grid.Column="3"/>
+                                <TextBox IsReadOnly="True" Text="{Binding Order}" Grid.Column="4"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </HeaderedItemsControl>
+            </ScrollViewer>
+            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Path=ProgressTracker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="lstProgressMeter">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox ToolTip="{Binding SolutionName}" IsReadOnly="True" Grid.Column="0" Text="{Binding SolutionName}"/>
+                                <TextBox IsReadOnly="True" Grid.Column="1" Text="{Binding ProgressValue}"/>
+                                <TextBox IsReadOnly="True" Grid.Column="2" Text="{Binding Status}"/>
+                                <ProgressBar Grid.Column="3" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Grid Grid.Row="5">
+                <Button x:Name="btnImport" Grid.Column="0" Content="Import" Click="btnImport_Click"/>
+                <Button x:Name="btnCopy" Grid.Column="1" Content="Copy logs" Click="btnCopyLogs_Click"/>
+                <!--<Button x:Name="btnCopy1" Grid.Column="2" Content="Copy logs" Click="btnCopy1_Click"/>-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <!--<ColumnDefinition/>-->
+                </Grid.ColumnDefinitions>
+
+            </Grid>
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <Expander IsExpanded="True" Grid.Row="1" Grid.ColumnSpan="2" ExpandDirection="Down">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox MaxLines="1500" TextWrapping="Wrap" Text="" Name="txtProgress" IsReadOnly="True"/>
+            </ScrollViewer>
+        </Expander>
+    </Grid>
+</Window>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
